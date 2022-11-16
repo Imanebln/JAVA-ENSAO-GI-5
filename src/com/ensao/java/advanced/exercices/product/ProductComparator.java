@@ -15,7 +15,10 @@ public class ProductComparator implements Comparator<Product> {
 	
 	@Override
 	public int compare(Product productA, Product productB) {
-		throw new ToBeCompletedException("if 'byPrice' is false compare products using their names," +
-				" use the price otherwise");
+		Comparator<Product> monComparateur = (a, b) -> a.getPrice().compareTo(b.getPrice());
+		if(byPrice){
+			return monComparateur.compare(productA,productB);
+		}
+		return Comparator.comparing(Product::getName).compare(productA,productB);
 	}
 }
